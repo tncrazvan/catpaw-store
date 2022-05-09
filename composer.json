@@ -1,0 +1,52 @@
+{
+  "name": "catpaw/store",
+  "type": "library",
+  "description": "Reactive variables implemented through the Observable design pattern. Inspired by Svelte's stores.",
+  "homepage": "https://github.com/tncrazvan/catpaw-store",
+  "license": "MIT",
+  "keywords": [
+    "php",
+    "cli",
+    "reactive",
+    "store",
+    "catpaw"
+  ],
+  "scripts": {
+    "load": "@composer dump-autoload -o",
+    "script": "@php ./vendor/catpaw/core/scripts/start.php",
+    "start:example:readable": "@script examples/readable.php",
+    "start:example:writable": "@script examples/writable.php"
+  },
+  "authors": [
+    {
+      "name": "Razvan Tanase",
+      "email": "tangent.jotey@gmail.com",
+      "homepage": "https://github.com/tncrazvan",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Catpaw\\Store\\": "src/lib/"
+    },
+    "files": [
+      "src/functions.php"
+    ]
+  },
+  "autoload-dev": {
+    "Tests\\": "tests/"
+  },
+  "require": {
+    "php": "^8.0",
+    "catpaw/core": "^1.1",
+    "amphp/amp": "^2.6"
+  },
+  "config": {
+    "preferred-install": "dist",
+    "process-timeout": 0
+  },
+  "require-dev": {
+    "amphp/phpunit-util": "^2.0",
+    "phpunit/phpunit": "^9.5"
+  }
+}
