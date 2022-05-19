@@ -12,10 +12,10 @@
     "catpaw"
   ],
   "scripts": {
-    "load": "@composer dump-autoload -o",
-    "script": "@php ./vendor/catpaw/core/scripts/start.php",
-    "start:example:readable": "@script examples/readable.php",
-    "start:example:writable": "@script examples/writable.php"
+    "fix": [
+      "@php ./vendor/bin/php-cs-fixer fix src",
+      "@php ./vendor/bin/php-cs-fixer fix tests"
+    ]
   },
   "authors": [
     {
@@ -40,12 +40,12 @@
     "php": "^8.0",
     "amphp/amp": "^2.6"
   },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5",
+    "friendsofphp/php-cs-fixer": "^3.8"
+  },
   "config": {
     "preferred-install": "dist",
     "process-timeout": 0
-  },
-  "require-dev": {
-    "amphp/phpunit-util": "^2.0",
-    "phpunit/phpunit": "^9.5"
   }
 }
