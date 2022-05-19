@@ -19,9 +19,9 @@ class Readable {
     private bool                  $firstSubscriber = true;
 
     public function __construct(
-		protected mixed $value,
-		private Closure $onStart,
-	) {
+        protected mixed $value,
+        private Closure $onStart,
+    ) {
         $this->callbacks = new SplDoublyLinkedList();
         $this->callbacks->setIteratorMode(SplDoublyLinkedList::IT_MODE_FIFO | SplDoublyLinkedList::IT_MODE_KEEP);
     }
@@ -61,7 +61,7 @@ class Readable {
             $this->stop = (($this->onStart)(fn($value) => $this->set($value))) ?? false;
         }
 
-		($callback)($this->value);
+        ($callback)($this->value);
 
         return fn() => $this->unsubscribe($callback);
     }

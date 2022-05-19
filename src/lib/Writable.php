@@ -14,8 +14,8 @@ class Writable {
     protected SplDoublyLinkedList $callbacks;
 
     public function __construct(
-		protected mixed $value
-	) {
+        protected mixed $value
+    ) {
         $this->callbacks = new SplDoublyLinkedList();
         $this->callbacks->setIteratorMode(SplDoublyLinkedList::IT_MODE_FIFO | SplDoublyLinkedList::IT_MODE_KEEP);
     }
