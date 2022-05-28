@@ -2,7 +2,9 @@
 
 namespace Catpaw\Store;
 
+use function Amp\call;
 use Closure;
+
 use SplDoublyLinkedList;
 
 /**
@@ -50,7 +52,8 @@ class Writable {
     public function subscribe(Closure $callback): Closure {
         $this->callbacks->push($callback);
 
-        ($callback)($this->value);
+        call($callback, $this->value);
+        // ($callback)($this->value);
 
         return fn() => $this->unsubscribe($callback);
     }

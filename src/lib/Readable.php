@@ -57,11 +57,16 @@ class Readable {
         $this->callbacks->push($callback);
         if ($this->firstSubscriber) {
             $this->firstSubscriber = false;
-            //initiate the store and retrieve the stop function for later use
-            $this->stop = (($this->onStart)(fn($value) => $this->set($value))) ?? false;
+            call(function() use ($callback) {
+                //initiate the store and retrieve the stop function for later use
+                $stop = yield call($this->onStart, fn($value) => $this->set($value));
+                $this->stop = $stop ?? false;
+                call($callback, $this->value);
+            });
+        } else {
+            call($callback, $this->value);
+            // ($callback)($this->value);
         }
-
-        ($callback)($this->value);
 
         return fn() => $this->unsubscribe($callback);
     }

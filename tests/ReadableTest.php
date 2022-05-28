@@ -3,29 +3,25 @@
 namespace Tests;
 
 use function Amp\delay;
-use Amp\Loop;
+use Amp\PHPUnit\AsyncTestCase;
+
 use function CatPaw\Store\readable;
-use PHPUnit\Framework\TestCase;
 
-class ReadableTest extends TestCase {
+class ReadableTest extends AsyncTestCase {
     public function testCreationAnSubscribe() {
-        Loop::run(function() {
-            $store = readable("hello", function($set) {
-                delay(1000)->onResolve(function() use ($set) {
-                    $set("hello world");
-                });
-
-                return function() { };
-            });
-
-            $unsubscribe = $store->subscribe(fn($value) => $this->assertEquals("hello", $value));
-            $unsubscribe();
-
-
-            delay(2000)->onResolve(function() use ($store) {
-                $unsubscribe = $store->subscribe(fn($value) => $this->assertEquals("hello world", $value));
-                $unsubscribe();
-            });
+        $this->setTimeout(4000);
+        $store = readable("hello", function($set) {
+            yield delay(1000);
+            $set("hello world");
+            return function() { };
         });
+
+        
+        $unsubscribe = $store->subscribe(fn($value) => $this->assertEquals("hello", $value));
+        $unsubscribe();
+
+        yield delay(2000);
+        $unsubscribe = $store->subscribe(fn($value) => $this->assertEquals("hello world", $value));
+        $unsubscribe();
     }
 }
