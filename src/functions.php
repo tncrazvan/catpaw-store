@@ -8,16 +8,14 @@ use Closure;
 use Generator;
 
 /**
- * @template T
- * @param  mixed       $value
- * @return Writable<T>
+ * @param  mixed    $value
+ * @return Writable
  */
 function writable(mixed $value): Writable {
     return new Writable($value);
 }
 
 /**
- * @template T
  * @param  mixed    $value
  * @param  Closure  $start
  * @return Readable

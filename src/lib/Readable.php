@@ -3,19 +3,14 @@
 namespace Catpaw\Store;
 
 use function Amp\call;
-use Amp\LazyPromise;
 use Closure;
-use Generator;
 use SplDoublyLinkedList;
 
-/**
- * @template T
- */
 class Readable {
 
     /** @var SplDoublyLinkedList<Closure> */
     protected SplDoublyLinkedList $callbacks;
-    private false|Closure         $stop = false;
+    private false|Closure         $stop            = false;
     private bool                  $firstSubscriber = true;
 
     public function __construct(
@@ -28,7 +23,7 @@ class Readable {
 
     /**
      * Get the value of the store.
-     * @return T
+     * @return mixed
      */
     public function get(): mixed {
         return $this->value;
@@ -36,7 +31,7 @@ class Readable {
 
     /**
      * Set the value of the store.
-     * @param  T    $value
+     * @param  mixed $value
      * @return void
      */
     private function set(mixed $value): void {

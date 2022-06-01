@@ -7,9 +7,6 @@ use Closure;
 
 use SplDoublyLinkedList;
 
-/**
- * @template T
- */
 class Writable {
 
     /** @var SplDoublyLinkedList<Closure> */
@@ -24,7 +21,7 @@ class Writable {
 
     /**
      * Get the value of the store.
-     * @return T
+     * @return mixed
      */
     public function get(): mixed {
         return $this->value;
@@ -32,7 +29,7 @@ class Writable {
 
     /**
      * Set the value of the store.
-     * @param  T    $value
+     * @param  mixed $value
      * @return void
      */
     public function set(mixed $value): void {
