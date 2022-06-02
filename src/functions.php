@@ -5,7 +5,6 @@ namespace CatPaw\Store;
 use Catpaw\Store\Readable;
 use Catpaw\Store\Writable;
 use Closure;
-use Generator;
 
 /**
  * @param  mixed    $value
