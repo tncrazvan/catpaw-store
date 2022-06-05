@@ -35,7 +35,8 @@ class Writable {
     public function set(mixed $value): void {
         $this->value = $value;
         for ($this->callbacks->rewind(); $this->callbacks->valid(); $this->callbacks->next()) {
-            $this->callbacks->current()($this->value);
+            $callback = $this->callbacks->current();
+            call($callback, $this->value);
         }
     }
 
